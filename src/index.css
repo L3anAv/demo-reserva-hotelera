@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+/* Reset de margen y relleno */
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, figure, figcaption, blockquote, dl, dd {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Eliminar decoraciones de enlaces */
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* Eliminar viñetas de listas */
+  ul, ol {
+    list-style: none;
+  }
+  
+  /* Eliminar relleno y bordes de imágenes */
+  img {
+    display: block;
+    border: none;
+    padding: 0;
+  }
+  
+  /* Eliminar margen y relleno en todos los elementos */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Configuración básica del cuerpo de la página */
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background:#5169c9;
+  }
+  
+  /* Opcional: Establecer un ancho máximo para el contenido */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
