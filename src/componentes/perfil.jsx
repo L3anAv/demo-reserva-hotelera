@@ -1,3 +1,4 @@
+import Header from './header'
 import { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -47,17 +48,7 @@ const UserPanel = () => {
 
   return (
     <Container>
-      <Menu>
-        <MenuItem>
-          <Enlace to="/">Inicio</Enlace>
-        </MenuItem>
-        <MenuItem>
-          <Enlace to="/reservas">Reservas</Enlace>
-        </MenuItem>
-        <MenuItem>
-          <Enlace to="/perfil">Perfil</Enlace>
-        </MenuItem>
-      </Menu>
+      <Header />
       <Panel>
         <OptionsPanel>
           <Title>Opciones de perfil</Title>
@@ -108,7 +99,7 @@ const UserPanel = () => {
                 </ReservationInfo>
                 <ReservationInfo>
                   <ReservationLabel>Fecha De Fin de estadia:</ReservationLabel>
-                  <ReservationValue>{formatDate(reserva.fechaInicio)}</ReservationValue>
+                  <ReservationValue>{formatDate(reserva.fechaFin)}</ReservationValue>
                 </ReservationInfo>
                 <ReservationInfo>
                   <ReservationLabel>Cantidad de días:</ReservationLabel>
@@ -167,27 +158,6 @@ const Panel = styled.div`
   flex-direction: row;
   width: 100%;
   flex: 1;
-`;
-
-const Menu = styled.ul`
-  display: flex;
-  justify-content: center;
-  list-style-type: none;
-  margin-top: 20px;
-`;
-
-const MenuItem = styled.li`
-  cursor: pointer;
-  font-size: 16px;
-  user-select: none;
-  font-weight: bold;
-  padding-left: 22px;
-  padding-right: 22px;
-  font-family: 'Arial', sans-serif;
-`;
-
-const Enlace = styled(Link)`
-  color: #000;
 `;
 
 const OptionsPanel = styled.div`

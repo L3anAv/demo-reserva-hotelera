@@ -1,6 +1,7 @@
 import Card from './card';
+import Header from './header'
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+
 
 const ReservasContainer = styled.div`
   display: flex;
@@ -70,24 +71,6 @@ const CardsContainer = styled.div`
   align-items: flex-start;
   width: 100%;
   padding: 16px;
-`;
-
-const Menu = styled.ul`
-  display: flex;
-  margin-top:20px;
-  margin-right:50px;
-  margin-bottom:20px;
-  list-style-type: none;
-`;
-
-const MenuItem = styled.li`
-    cursor:pointer;
-    font-size: 16px;
-    user-select:none;
-    font-weight: bold;
-    padding-left:22px;
-    padding-right:22px;
-    font-family: 'Arial', sans-serif;
 `;
 
 const Logo = styled.h1`
@@ -172,10 +155,7 @@ const Reservas = () => {
           <DateInput type="date" />
         </FilterItem>
       </Sidebar>
-      <Menu>
-        <MenuItem><Link to="/">Inicio</Link></MenuItem>
-        <MenuItem><Link to="/perfil">Perfil</Link></MenuItem>
-      </Menu>
+      <Header />
       <ContentContainer>
         <CardsContainer>
           <Card id={hoteles[0].id} cardTitle={hoteles[0].nombre} description={hoteles[0].descripcion} ubicacion={hoteles[0].ubicacion} image={'public/imagenesFondo/hotel3.jpg'}/>

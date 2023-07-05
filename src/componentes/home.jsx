@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Header from './header'
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const Container = styled.div`
     display: flex;
@@ -21,54 +24,6 @@ const CentroInfo = styled.div`
     flex-direction: column;
     background-color: rgba(255, 255, 255, 0.8);
 `
-
-const Header = styled.div`
-    display:flex;
-    margin-top:20px;
-    flex-direction:row;
-`
-
-const Logo = styled.h1`
-  font-family: 'Arial', sans-serif;
-  font-size: 24px;
-  font-weight: bold;
-  color: #003580;
-  display: flex;
-  align-items: center;
-  margin-left: 40px;
-  margin-right: auto;
-  margin-bottom:100px;
-
-&::before {
-  content: 'R';
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: #003580;
-  color: #ffffff;
-  text-align: center;
-  line-height: 30px;
-  margin-right: 5px;
-}
-
-`;
-
-const Menu = styled.ul`
-  display: flex;
-  margin-right:50px;
-  list-style-type: none;
-`;
-
-const MenuItem = styled.li`
-    cursor:pointer;
-    font-size: 16px;
-    user-select:none;
-    font-weight: bold;
-    padding-left:22px;
-    padding-right:22px;
-    font-family: 'Arial', sans-serif;
-`;
 
 const Text = styled.p`
   font-weight:600;
@@ -107,16 +62,53 @@ const ButtonText = styled.a`
   font-family: 'Arial', sans-serif;
 `;
 
+const AppContainer = styled.div`
+  position: relative;
+  overflow:hidden;
+`;
+
+const Slider = styled(Carousel)`
+.carousel .slide {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.carousel .slide img {
+  opacity:0.8;
+  object-fit: cover;
+  filter: blur(3px);
+}
+
+.carousel .thumbs-wrapper {
+  display: none;
+}
+`;
+
 const Home = () => {
+
+  const sliderImages = [
+    'public/imagenesFondo/hotel1.jpg',
+    'public/imagenesFondo/hotel2.jpg',
+    'public/imagenesFondo/hotel3.jpg',
+    'public/imagenesFondo/hotel4.jpg'
+  ];
+
   return (
+    <>
+    <AppContainer>
+      <Slider infiniteLoop autoPlay showStatus={false} showIndicators={false} showArrows={false} >
+        {sliderImages.map((image, index) => (
+          <div key={index}>
+            <img src={image} alt={`Slide ${index}`} />
+          </div>
+        ))}
+      </Slider>
+    </AppContainer>
     <Container>
-     <Header>
-      <Logo>Reserva Hotelera</Logo>
-      <Menu>
-        <MenuItem><Link to="/">Inicio</Link></MenuItem>
-        <MenuItem><Link to="/perfil">Perfil</Link></MenuItem>
-      </Menu>
-      </Header>
+      <Header />
       <CentroInfo>
         <Text>¡Explora nuestras increíbles ofertas de reserva!</Text>
         <Boton>
@@ -124,6 +116,7 @@ const Home = () => {
         </Boton>
       </CentroInfo>
     </Container>
+    </>
   );
 };
 

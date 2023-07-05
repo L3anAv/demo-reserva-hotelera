@@ -1,28 +1,8 @@
+import Header from './header'
 import styled from 'styled-components';
-import { Link, useNavigate  } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState, useEffect} from 'react';
 import { differenceInCalendarDays } from 'date-fns';
-
-const Menu = styled.ul`
-  display: flex;
-  justify-content: center;
-  list-style-type: none;
-  margin-top: 20px;
-`;
-
-const MenuItem = styled.li`
-  cursor: pointer;
-  font-size: 16px;
-  user-select: none;
-  font-weight: bold;
-  padding-left: 22px;
-  padding-right: 22px;
-  font-family: 'Arial', sans-serif;
-`;
-
-const Enlace = styled(Link)`
-    color:#000;
-`
 
 const FormContainer = styled.div`
   display: flex;
@@ -155,7 +135,7 @@ const RemoveButton = styled.button`
 
 const Formulario = () => {
 
-  const navigate = useNavigate();
+  /*const navigate = useNavigate();*/
 
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
@@ -440,7 +420,7 @@ const Formulario = () => {
       dni != '' &&
       email != ''){
         EnviarDatos()
-        navigate("/perfil");
+        /*navigate("/perfil");*/
     }else{
       alert('Faltan completar datos en el formulario.')
     }
@@ -477,21 +457,15 @@ const Formulario = () => {
 
   return (
     <>
-    <Menu>
-        <MenuItem>
-          <Enlace to="/">Inicio</Enlace>
-        </MenuItem>
-        <MenuItem>
-          <Enlace to="/perfil">Perfil</Enlace>
-        </MenuItem>
-      </Menu>
+    <Header />
 
     <FormContainer>
       <FormWrapper onSubmit={handleFormSubmit}>
         <FormColumn>
 
-          <Label>Nombre:</Label>
+          <Label htmlFor="nombreInput">Nombre:</Label>
           <Input
+            id="nombreInput"
             type="text"
             name="Nombre"
             value={nombre}
@@ -520,8 +494,9 @@ const Formulario = () => {
           />
           {warnings.nombre.mostrar && <WargningLabel>{warnings.nombre.valor}</WargningLabel>}
 
-          <Label>Apellido:</Label>
+          <Label htmlFor="apellidoInput">Apellido:</Label>
           <Input
+            id="apellidoInput"
             type="text"
             value={apellido}
             onChange={(e) => {
@@ -549,8 +524,9 @@ const Formulario = () => {
           />
           {warnings.apellido.mostrar && <WargningLabel>{warnings.apellido.valor}</WargningLabel>}
 
-          <Label>DNI:</Label>
+          <Label htmlFor="dniInput">DNI:</Label>
           <Input
+              id="dniInput"
               type="text"
               value={dni}
               name="dniPersona"
@@ -584,8 +560,9 @@ const Formulario = () => {
 
           {warnings.dni.mostrar && <WargningLabel>{warnings.dni.valor}</WargningLabel>}
               
-          <Label>Email:</Label>
+          <Label htmlFor="emailInput">Email:</Label>
           <Input
+            id="emailInput"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)
@@ -618,16 +595,18 @@ const Formulario = () => {
         Reservar con mis datos
         </CheckboxLabel>
 
-        <Label>Desde:</Label>
+        <Label htmlFor="desdeInput">Desde:</Label>
         <Input
+          id="desdeInput"
           type="date"
           value={fechaInicio ? fechaInicio.toISOString().split('T')[0] : ''}
           onChange={handleFechaInicioChange}
           required
         />
 
-        <Label>Hasta:</Label>
+        <Label htmlFor="hastaInput">Hasta:</Label>
         <Input
+          id="hastaInput"
           type="date"
           value={fechaFin ? fechaFin.toISOString().split('T')[0] : ''}
           onChange={handleFechaFinChange}
@@ -635,8 +614,8 @@ const Formulario = () => {
         />
        {warnings.Fecha.mostrar && <WargningLabel>{warnings.Fecha.valor}</WargningLabel>}
       
-          <Label>Medio de Pago:</Label>
-          <Select value={medioPago} onChange={handleMedioPagoChange} required>
+          <Label htmlFor="selectPago">Medio de Pago:</Label>
+          <Select id="selectPago" value={medioPago} onChange={handleMedioPagoChange} required>
             <Option value="">Seleccionar</Option>
             <Option value="pago efectivo">Pago en Efectivo</Option>
             <Option value="pago tarjeta">Pago con Tarjeta</Option>
@@ -644,8 +623,9 @@ const Formulario = () => {
 
           {medioPago === 'pago_tarjeta' && (
             <>
-              <Label>Número de Tarjeta:</Label>
+              <Label htmlFor="numTarjeta">Número de Tarjeta:</Label>
               <Input
+                id="numTarjeta"
                 type="text"
                 value={datosTarjeta.numero}
                 onChange={(e) =>
@@ -657,8 +637,9 @@ const Formulario = () => {
                 required
               />
 
-              <Label>Vencimiento:</Label>
+              <Label htmlFor="vencimientoInput">Vencimiento:</Label>
               <Input
+                id="vencimientoInput"
                 type="text"
                 value={datosTarjeta.vencimiento}
                 onChange={(e) =>
@@ -670,8 +651,9 @@ const Formulario = () => {
                 required
               />
 
-              <Label>Código de Seguridad:</Label>
+              <Label htmlFor="seguridadCodigo">Código de Seguridad:</Label>
               <Input
+                id="seguridadCodigo"
                 type="text"
                 value={datosTarjeta.codigo}
                 onChange={(e) =>
@@ -687,8 +669,9 @@ const Formulario = () => {
         </FormColumn>
 
         <FormColumn>
-          <Label>Hotel:</Label>
+          <Label htmlFor="selectHotel">Hotel:</Label>
           <Select
+            id="selectHotel"
             value={hotel}
             onChange={(e) => setHotel(e.target.value)}
             required
@@ -700,8 +683,9 @@ const Formulario = () => {
             <Option value="4">Hotel Mar del Plata</Option>
           </Select>
 
-          <Label>Cantidad de Personas en Habitación:</Label>
+          <Label htmlFor="selectPersonas">Cantidad de Personas en Habitación:</Label>
           <Select
+            id="selectPersonas"
             value={cantidadPersonas}
             onChange={handleCantidadPersonasChange}
             required
@@ -722,8 +706,9 @@ const Formulario = () => {
                   <label> {'>'} Persona {index + 1}:</label>
                 </PersonaID>
                 <div>
-                  <label>Nombre:</label>
+                  <label htmlFor="nombrePersonas">Nombre:</label>
                   <Input
+                    id="nombrePersonas"
                     type="text"
                     value={persona.nombre}
                     onChange={(e) => {
@@ -752,8 +737,9 @@ const Formulario = () => {
                   {warningsPersona.nombre.mostrar && <WargningLabel>{warningsPersona.nombre.valor}</WargningLabel>}
                 </div>
                 <div>
-                  <label>Apellido:</label>
+                  <label htmlFor="apellidoPersonas">Apellido:</label>
                   <Input
+                    id="apellidoPersonas"
                     type="text"
                     value={persona.apellido}
                     onChange={(e) =>{
@@ -782,8 +768,9 @@ const Formulario = () => {
                   {warningsPersona.apellido.mostrar && <WargningLabel>{warningsPersona.apellido.valor}</WargningLabel>}
                 </div>
                 <div>
-                  <label>DNI:</label>
+                  <label htmlFor="dniPersonas">DNI:</label>
                   <Input
+                    id="dniPersonas"
                     type="text"
                     value={persona.dni}
                     name="dniPersonas"
@@ -845,8 +832,8 @@ const Formulario = () => {
             </div>
           ))}
 
-          <Label>Servicios:</Label>
-          <div>
+          <Label htmlFor="serviciosInput">Servicios:</Label>
+          <div id="serviciosInput">
             <CheckboxLabel>
               <CheckboxInput
                 type="checkbox"
